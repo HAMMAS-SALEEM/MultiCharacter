@@ -3,6 +3,7 @@ import person from '../../assets/person.png'
 import wallet from '../../assets/wallet.png'
 import bank from '../../assets/bank.png'
 import calender from '../../assets/calender.png'
+import ReactFocusLock from 'react-focus-lock'
 
 const icons = [
   { id: 1, icon: person },
@@ -56,52 +57,54 @@ const CharDetails = () => {
   }
 
   return (
-    <div
-      tabIndex='0'
-      onKeyDown={handleKeyDown}
-      className='outline-0 border-0 flex items-baseline'
-    >
-      {players
-        .filter((p, i) => i === counter)
-        .map(player => (
-          <div className='p-7' key={player.id}>
-            <h1 className='text-7xl font-bold stroke-cyan-700 text-white h1'>
-              {player.name.split(' ')[0]}
-            </h1>
-            <h2 className='text-3xl font-bold stroke-cyan-700 text-white h1'>
-              {player.name.split(' ')[1]}
-            </h2>
-            <ul className="flex flex-col gap-1 mt-3">
-              {Object.keys(player.additionalInfo).map((p, i) => (
-                <li key={p} className='flex items-center gap-2'>
-                  <img src={icons[i].icon} alt='person' className='w-7' />
-                  <span className='text-white font-bold'>
-                    {player.additionalInfo[p]}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      <div className='flex gap-4 relative bottom-3'>
-        <button
-          type='button'
-          onClick={() => counter !== 0 && setCounter(counter - 1)}
-          className='bg-black text-white w-[40px] h-[40px] rounded-[50%] font-bold'
-        >
-          Q
-        </button>
-        <button
-          type='button'
-          onClick={() =>
-            counter < players.length - 1 && setCounter(counter + 1)
-          }
-          className='bg-black text-white w-[40px] h-[40px] rounded-[50%] font-bold'
-        >
-          E
-        </button>
+    <ReactFocusLock>
+      <div
+        tabIndex='0'
+        onKeyDown={handleKeyDown}
+        className='outline-0 border-0 flex items-baseline'
+      >
+        {players
+          .filter((p, i) => i === counter)
+          .map(player => (
+            <div className='p-7 w-[30%]' key={player.id}>
+              <h1 className='text-7xl font-bold stroke-cyan-700 text-white h1'>
+                {player.name.split(' ')[0]}
+              </h1>
+              <h2 className='text-3xl font-bold stroke-cyan-700 text-white h1'>
+                {player.name.split(' ')[1]}
+              </h2>
+              <ul className='flex flex-col gap-1 mt-3'>
+                {Object.keys(player.additionalInfo).map((p, i) => (
+                  <li key={p} className='flex items-center gap-2'>
+                    <img src={icons[i].icon} alt='person' className='w-7' />
+                    <span className='text-white font-bold'>
+                      {player.additionalInfo[p]}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        <div className='flex gap-4 relative bottom-3'>
+          <button
+            type='button'
+            onClick={() => counter !== 0 && setCounter(counter - 1)}
+            className='bg-black text-white w-[40px] h-[40px] rounded-[50%] font-bold'
+          >
+            Q
+          </button>
+          <button
+            type='button'
+            onClick={() =>
+              counter < players.length - 1 && setCounter(counter + 1)
+            }
+            className='bg-black text-white w-[40px] h-[40px] rounded-[50%] font-bold'
+          >
+            E
+          </button>
+        </div>
       </div>
-    </div>
+    </ReactFocusLock>
   )
 }
 
