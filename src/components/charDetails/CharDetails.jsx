@@ -5,26 +5,32 @@ const players = [
   {
     id: 1,
     name: 'Usman Saleem',
-    type: 'Civilian',
-    currencyInHand: '1000',
-    currencyInBank: '10000000',
-    DOB: '2004-02-01'
+    additionalInfo: {
+      type: 'Civilian',
+      currencyInHand: '1000',
+      currencyInBank: '10000000',
+      DOB: '2004-02-01'
+    }
   },
   {
     id: 2,
     name: 'Steve Smith',
-    type: 'Police',
-    currencyInHand: '5000',
-    currencyInBank: '9000000',
-    DOB: '2002-12-5'
+    additionalInfo: {
+      type: 'Police',
+      currencyInHand: '5000',
+      currencyInBank: '9000000',
+      DOB: '2002-12-5'
+    }
   },
   {
     id: 3,
     name: 'Babar Azam',
-    type: 'Mafia Boss',
-    currencyInHand: '50',
-    currencyInBank: '99999999990',
-    DOB: '1990-01-12'
+    additionalInfo: {
+      type: 'Mafia Boss',
+      currencyInHand: '50',
+      currencyInBank: '99999999990',
+      DOB: '1990-01-12'
+    }
   }
 ]
 
@@ -41,8 +47,8 @@ const CharDetails = () => {
 
   return (
     <div
-      onKeyDown={handleKeyDown}
       tabIndex='0'
+      onKeyDown={handleKeyDown}
       className='outline-0 border-0 flex items-baseline'
     >
       {players
@@ -55,19 +61,19 @@ const CharDetails = () => {
             <h2 className='text-3xl font-bold stroke-cyan-700 text-white h1'>
               {player.name.split(' ')[1]}
             </h2>
-            <ul>
-              <li>
-                <img src={person} alt='person' className='w-6' />
-                <span>{player.type}</span>
-              </li>
-            </ul>
+            <ul>{Object.keys(player.additionalInfo).map((p) => (
+                <li key={p} className="flex items-center">
+                    <img src={person} alt="person" className="w-7" />
+                    <span className="text-white font-bold">{player.additionalInfo[p]}</span>
+                </li>
+            ))}</ul>
           </div>
         ))}
-      <div className="flex gap-4 relative bottom-3">
+      <div className='flex gap-4 relative bottom-3'>
         <button
           type='button'
           onClick={() => counter !== 0 && setCounter(counter - 1)}
-          className="bg-black text-white w-[40px] h-[40px] rounded-[50%] font-bold"
+          className='bg-black text-white w-[40px] h-[40px] rounded-[50%] font-bold'
         >
           Q
         </button>
@@ -76,7 +82,7 @@ const CharDetails = () => {
           onClick={() =>
             counter < players.length - 1 && setCounter(counter + 1)
           }
-          className="bg-black text-white w-[40px] h-[40px] rounded-[50%] font-bold"
+          className='bg-black text-white w-[40px] h-[40px] rounded-[50%] font-bold'
         >
           E
         </button>
