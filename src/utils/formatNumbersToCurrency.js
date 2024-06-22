@@ -4,10 +4,10 @@ export const formatNumberToCurrency = (number, currencySymbol = '') => {
   }
 
   const scales = [
-    { value: 1e9, symbol: 'Billion' },
-    { value: 1e7, symbol: 'Crore' },
-    { value: 1e6, symbol: 'Million' },
-    { value: 1e5, symbol: 'Lac' }
+    { value: 1e9, symbol: ' Billion' },
+    { value: 1e7, symbol: ' Crore' },
+    { value: 1e6, symbol: ' Million' },
+    { value: 1e5, symbol: ' Lac' }
   ]
 
   for (let i = 0; i < scales.length; i++) {
