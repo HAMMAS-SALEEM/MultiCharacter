@@ -4,6 +4,7 @@ import wallet from '../../assets/wallet.png'
 import bank from '../../assets/bank.png'
 import calender from '../../assets/calender.png'
 import ReactFocusLock from 'react-focus-lock'
+import { formatNumberToCurrency } from '../../utils/formatNumbersToCurrency'
 
 const icons = [
   { id: 1, icon: person },
@@ -18,8 +19,8 @@ const players = [
     name: 'Usman Saleem',
     additionalInfo: {
       type: 'Civilian',
-      currencyInHand: '1000',
-      currencyInBank: '10000000',
+      currencyInHand: 1000,
+      currencyInBank: 10000000,
       DOB: '2004-02-01'
     }
   },
@@ -28,8 +29,8 @@ const players = [
     name: 'Steve Smith',
     additionalInfo: {
       type: 'Police',
-      currencyInHand: '5000',
-      currencyInBank: '9000000',
+      currencyInHand: 5000,
+      currencyInBank: 9000000,
       DOB: '2002-12-5'
     }
   },
@@ -38,8 +39,8 @@ const players = [
     name: 'Babar Azam',
     additionalInfo: {
       type: 'Mafia Boss',
-      currencyInHand: '50',
-      currencyInBank: '99999999990',
+      currencyInHand: 50,
+      currencyInBank: 99999999990,
       DOB: '1990-01-12'
     }
   }
@@ -78,7 +79,7 @@ const CharDetails = () => {
                   <li key={p} className='flex items-center gap-2'>
                     <img src={icons[i].icon} alt='person' className='w-7' />
                     <span className='text-white font-bold'>
-                      {player.additionalInfo[p]}
+                      {formatNumberToCurrency(player.additionalInfo[p])}
                     </span>
                   </li>
                 ))}
