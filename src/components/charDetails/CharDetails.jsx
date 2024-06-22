@@ -1,5 +1,15 @@
 import React, { useState } from 'react'
 import person from '../../assets/person.png'
+import wallet from '../../assets/wallet.png'
+import bank from '../../assets/bank.png'
+import calender from '../../assets/calender.png'
+
+const icons = [
+  { id: 1, icon: person },
+  { id: 2, icon: wallet },
+  { id: 3, icon: bank },
+  { id: 4, icon: calender }
+]
 
 const players = [
   {
@@ -61,12 +71,16 @@ const CharDetails = () => {
             <h2 className='text-3xl font-bold stroke-cyan-700 text-white h1'>
               {player.name.split(' ')[1]}
             </h2>
-            <ul>{Object.keys(player.additionalInfo).map((p) => (
-                <li key={p} className="flex items-center">
-                    <img src={person} alt="person" className="w-7" />
-                    <span className="text-white font-bold">{player.additionalInfo[p]}</span>
+            <ul className="flex flex-col gap-1 mt-3">
+              {Object.keys(player.additionalInfo).map((p, i) => (
+                <li key={p} className='flex items-center gap-2'>
+                  <img src={icons[i].icon} alt='person' className='w-7' />
+                  <span className='text-white font-bold'>
+                    {player.additionalInfo[p]}
+                  </span>
                 </li>
-            ))}</ul>
+              ))}
+            </ul>
           </div>
         ))}
       <div className='flex gap-4 relative bottom-3'>
