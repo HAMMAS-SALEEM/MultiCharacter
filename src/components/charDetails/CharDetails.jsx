@@ -12,7 +12,7 @@ const CharDetails = () => {
   const [buttonNumber, setButtonNumber] = useState(0)
 
   const handleMenuButton = () => {
-    console.log("Button Pressed")
+    console.log('Button Pressed')
   }
 
   const handleKeyDown = e => {
@@ -30,11 +30,16 @@ const CharDetails = () => {
     }
   }
 
+  const handleMouseMove = e => {
+    console.log(e.clientX, e.clientY)
+  }
+
   return (
     <ReactFocusLock>
       <div
         tabIndex='0'
         onKeyDown={handleKeyDown}
+        onMouseMove={handleMouseMove}
         className='outline-0 border-0 flex items-baseline'
       >
         {players
