@@ -1,5 +1,5 @@
 import React from 'react'
-import deleteButton from '../../assets/delete.png'
+import deleteButton from '../../../assets/delete.png'
 
 const DeleteButton = () => {
   return (

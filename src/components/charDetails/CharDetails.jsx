@@ -1,59 +1,32 @@
 import React, { useState } from 'react'
-import person from '../../assets/person.png'
-import wallet from '../../assets/wallet.png'
-import bank from '../../assets/bank.png'
-import calender from '../../assets/calender.png'
 import ReactFocusLock from 'react-focus-lock'
 import { formatNumberToCurrency } from '../../utils/formatNumbersToCurrency'
-
-const icons = [
-  { id: 1, icon: person },
-  { id: 2, icon: wallet },
-  { id: 3, icon: bank },
-  { id: 4, icon: calender }
-]
-
-const players = [
-  {
-    id: 1,
-    name: 'Usman Saleem',
-    additionalInfo: {
-      type: 'Civilian',
-      currencyInHand: 1000,
-      currencyInBank: 10000000,
-      DOB: '2004-02-01'
-    }
-  },
-  {
-    id: 2,
-    name: 'Steve Smith',
-    additionalInfo: {
-      type: 'Police',
-      currencyInHand: 5000,
-      currencyInBank: 9000000,
-      DOB: '2002-12-5'
-    }
-  },
-  {
-    id: 3,
-    name: 'Babar Azam',
-    additionalInfo: {
-      type: 'Mafia Boss',
-      currencyInHand: 50,
-      currencyInBank: 99999999990,
-      DOB: '1990-01-12'
-    }
-  }
-]
+import menuButtons from './menuButtons/buttons'
+import MenuButton from './menuButtons/MenuButton'
+import DeleteButton from './menuButtons/DeleteButton'
+import { players } from './data/players'
+import { icons } from './data/icons'
 
 const CharDetails = () => {
   const [counter, setCounter] = useState(0)
+  const [buttonNumber, setButtonNumber] = useState(0)
+
+  const handleMenuButton = () => {
+    console.log("Button Pressed")
+  }
 
   const handleKeyDown = e => {
+    console.log(e.keyCode)
     if (e.keyCode === 81 && counter !== 0) {
       setCounter(counter - 1)
     } else if (e.keyCode === 69 && counter < players.length - 1) {
       setCounter(counter + 1)
+    } else if (e.keyCode === 39 && buttonNumber < menuButtons.length - 1) {
+      setButtonNumber(buttonNumber + 1)
+    } else if (e.keyCode === 37 && buttonNumber !== 0) {
+      setButtonNumber(buttonNumber - 1)
+    } else if (e.keyCode === 17) {
+      handleMenuButton()
     }
   }
 
@@ -67,7 +40,7 @@ const CharDetails = () => {
         {players
           .filter((p, i) => i === counter)
           .map(player => (
-            <div className='p-7 w-[30%]' key={player.id}>
+            <div className='p-7 min-w-[300px]' key={player.id}>
               <h1 className='text-7xl font-bold stroke-cyan-700 text-white h1'>
                 {player.name.split(' ')[0]}
               </h1>
@@ -104,6 +77,19 @@ const CharDetails = () => {
             E
           </button>
         </div>
+      </div>
+      <div className='absolute bottom-0 right-0 left-0 p-[30px] flex justify-between menu-btns-container'>
+        <div className='flex justify-around w-[50%]'>
+          {menuButtons.map((button, index) => (
+            <MenuButton
+              key={button.id}
+              button={button}
+              active={index === buttonNumber ? true : false}
+              handleMenuButton={handleMenuButton}
+            />
+          ))}
+        </div>
+        <DeleteButton />
       </div>
     </ReactFocusLock>
   )
