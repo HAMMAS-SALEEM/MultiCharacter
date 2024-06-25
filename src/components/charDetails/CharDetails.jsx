@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactFocusLock from 'react-focus-lock'
 import { formatNumberToCurrency } from '../../utils/formatNumbersToCurrency'
 import menuButtons from './menuButtons/buttons'
@@ -16,7 +16,6 @@ const CharDetails = () => {
   }
 
   const handleKeyDown = e => {
-    console.log(e.keyCode)
     if (e.keyCode === 81 && counter !== 0) {
       setCounter(counter - 1)
     } else if (e.keyCode === 69 && counter < players.length - 1) {
@@ -32,14 +31,27 @@ const CharDetails = () => {
 
   const handleMouseMove = e => {
     console.log(e.clientX, e.clientY)
+    ref.current.focus()
   }
 
+  const ref = useRef()
+
+  const handleRef = () => {
+    ref.current.focus()
+  }
+
+  useEffect(() => {
+    handleRef()
+  })
+
   return (
-    <ReactFocusLock>
+    // <ReactFocusLock>
+    <>
       <div
         tabIndex='0'
         onKeyDown={handleKeyDown}
         onMouseMove={handleMouseMove}
+        ref={ref}
         className='outline-0 border-0 flex items-baseline'
       >
         {players
@@ -96,7 +108,8 @@ const CharDetails = () => {
         </div>
         <DeleteButton />
       </div>
-    </ReactFocusLock>
+    </>
+    // </ReactFocusLock>
   )
 }
 

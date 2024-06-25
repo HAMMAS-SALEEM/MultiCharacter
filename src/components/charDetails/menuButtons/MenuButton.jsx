@@ -7,7 +7,7 @@ const MenuButton = ({ button, active = false, handleMenuButton }) => {
       onClick={handleMenuButton}
       className={`${
         active ? 'text-yellow-500' : 'text-white'
-      } font-bold text-2xl self-end`}
+      } hover:text-yellow-500 font-bold text-2xl self-end`}
     >
       {button.button}
     </button>
