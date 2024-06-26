@@ -12,13 +12,14 @@ const CharDetails = () => {
   const [buttonNumber, setButtonNumber] = useState(0)
 
   const handleMenuButton = () => {
+    handleRef()
     console.log('Button Pressed')
   }
 
   const handleKeyDown = e => {
-    if (e.keyCode === 81 && counter !== 0) {
+    if ([81, 113].includes(e.keyCode) && counter !== 0) {
       setCounter(counter - 1)
-    } else if (e.keyCode === 69 && counter < players.length - 1) {
+    } else if ([69, 101].includes(e.keyCode) && counter < players.length - 1) {
       setCounter(counter + 1)
     } else if (e.keyCode === 39 && buttonNumber < menuButtons.length - 1) {
       setButtonNumber(buttonNumber + 1)
@@ -30,7 +31,6 @@ const CharDetails = () => {
   }
 
   const handleMouseMove = e => {
-    console.log(e.clientX, e.clientY)
     ref.current.focus()
   }
 
@@ -51,6 +51,7 @@ const CharDetails = () => {
         tabIndex='0'
         onKeyDown={handleKeyDown}
         onMouseMove={handleMouseMove}
+        onClick={handleRef}
         ref={ref}
         className='outline-0 border-0 flex items-baseline'
       >
@@ -106,7 +107,7 @@ const CharDetails = () => {
             />
           ))}
         </div>
-        <DeleteButton />
+        <DeleteButton handleDelete={handleMenuButton} />
       </div>
     </>
     // </ReactFocusLock>

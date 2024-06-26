@@ -1,9 +1,9 @@
 import React from 'react'
 import deleteButton from '../../../assets/delete.png'
 
-const DeleteButton = () => {
+const DeleteButton = ({handleDelete}) => {
   return (
-    <button type='button'>
+    <button type='button' onClick={handleDelete}>
       <img src={deleteButton} alt='delete' className='w-[200px] delete-btn' />
     </button>
   )
